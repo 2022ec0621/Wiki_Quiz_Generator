@@ -2,16 +2,21 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
+
+
+
+
 export default function Home() {
   const navigate = useNavigate();
   const [url, setUrl] = useState("");
   const [difficulty, setDifficulty] = useState("easy");
   const [loading, setLoading] = useState(false);
 
+  const VITE_API_URL = import.meta.env.VITE_API_URL;
   const handleGenerate = async () => {
     try {
       setLoading(true);
-      const res = await axios.post("http://127.0.0.1:8000/generate_quiz", {
+      const res = await axios.post(`${VITE_API_URL}/generate_quiz`, {
         url,
         difficulty,
       });
