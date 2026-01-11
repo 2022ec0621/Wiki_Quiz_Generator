@@ -120,19 +120,7 @@ def get_quiz_history(
     return {"history": history}
 
 
-@app.get("/history/{quiz_id}")
-def get_quiz_by_id(quiz_id: int, db: Session = Depends(get_db)):
-    quiz = db.query(Quiz).filter(Quiz.id == quiz_id).first()
 
-    if not quiz:
-        raise HTTPException(status_code=404, detail="Quiz not found")
-
-    return {
-        "id": quiz.id,
-        "title": quiz.title,
-        "difficulty": quiz.difficulty,
-        "quiz": json.loads(quiz.full_quiz_data)
-    }
 
 @app.delete("/history/{quiz_id}")
 def del_quiz_by_id( quiz_id: int,db: Session = Depends(get_db)):
